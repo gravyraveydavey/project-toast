@@ -18,8 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast( {variant, children, isOpen, setIsOpen}) {
-    if ( ! isOpen ) return false;
+function Toast( {variant, children, handleDismiss, id }) {
 
     const Icon = ICONS_BY_VARIANT[ variant ];
 
@@ -31,8 +30,8 @@ function Toast( {variant, children, isOpen, setIsOpen}) {
       <p className={styles.content}>
         {children}
       </p>
-      <button className={styles.closeButton}>
-        <X size={24} onClick={() => { setIsOpen(false )}}/>
+      <button className={styles.closeButton}  onClick={ () => handleDismiss( id ) }>
+        <X size={24}/>
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
