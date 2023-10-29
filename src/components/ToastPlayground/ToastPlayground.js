@@ -12,6 +12,7 @@ function ToastPlayground() {
   const [variant, setVariant] = React.useState("notice");
   //const [toasts, setToasts] = React.useState([]);
   const {addToast} = React.useContext( ToastContext );
+  const messageRef = React.useRef();
 function handleSubmit(event) {
     event.preventDefault();
     addToast( {
@@ -20,6 +21,7 @@ function handleSubmit(event) {
     } );
     setMessage("");
     setVariant("notice");
+    messageRef.current.focus();
   }
 
   return (
@@ -45,6 +47,7 @@ function handleSubmit(event) {
             <textarea
               id="message"
               required
+              ref={messageRef}
               minLength="1"
               className={styles.messageInput}
               value={message}
@@ -77,7 +80,6 @@ function handleSubmit(event) {
             })}
           </div>
         </div>
-        <ToastShelf />
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
@@ -85,6 +87,7 @@ function handleSubmit(event) {
           </div>
         </div>
       </form>
+      <ToastShelf />
     </div>
   );
 }
